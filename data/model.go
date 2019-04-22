@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// Data struct
 type Data struct {
 	NumberOfCases   int    `json:"numero_casas"`
 	Token           string `json:"token"`
@@ -13,7 +14,8 @@ type Data struct {
 	EncryptedResume string `json:"resumo_criptografico"`
 }
 
-func (d Data) Json() ([]byte, error) {
+// JSON marshals a Data type into a JSON string
+func (d Data) JSON() ([]byte, error) {
 	return json.Marshal(d)
 }
 

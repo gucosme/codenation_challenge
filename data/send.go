@@ -10,6 +10,8 @@ import (
 	"path/filepath"
 )
 
+// SendData reads the contents off the given file and send it as a
+// multipart-formdata request to the given url
 func SendData(url string, file *os.File) ([]byte, error) {
 	f, _ := os.Open(file.Name())
 	defer f.Close()

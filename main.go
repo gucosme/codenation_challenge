@@ -46,11 +46,11 @@ func main() {
 
 	url := os.Getenv("URL")
 	token := os.Getenv("TOKEN")
-	getUrl := fmt.Sprintf("%s/generate-data?token=%s", url, token)
-	postUrl := fmt.Sprintf("%s/submit-solution?token=%s", url, token)
+	getURL := fmt.Sprintf("%s/generate-data?token=%s", url, token)
+	postURL := fmt.Sprintf("%s/submit-solution?token=%s", url, token)
 
-	log.Printf(">> REQUESTING DATA TO %s\n", getUrl)
-	res, err := http.Get(getUrl)
+	log.Printf(">> REQUESTING DATA TO %s\n", getURL)
+	res, err := http.Get(getURL)
 	check(err)
 
 	log.Println(">> READING RESPONSE BODY")
@@ -75,15 +75,15 @@ func main() {
 	d.EncryptedResume = fmt.Sprintf("%x", h.Sum(nil))
 
 	log.Println(">> ENCODING DATA TO JSON")
-	j, err := d.Json()
+	j, err := d.JSON()
 	check(err)
 
 	log.Println(">> UPDATING FILE")
 	err = data.UpdateFile(file, j)
 	check(err)
 
-	log.Printf(">> SENDING FILE TO %s\n", postUrl)
-	content, err := data.SendData(postUrl, file)
+	log.Printf(">> SENDING FILE TO %s\n", postURL)
+	content, err := data.SendData(postURL, file)
 	check(err)
 	log.Printf(">> RECEIVED: %s\n", string(content))
 
